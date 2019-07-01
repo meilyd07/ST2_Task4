@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MainViewController.h
 //  EventApp
 //
 //  Created by Hanna Rybakova on 7/1/19.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface MainViewController : UIViewController
 
 
 @end

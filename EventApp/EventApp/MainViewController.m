@@ -1,18 +1,18 @@
 //
-//  ViewController.m
+//  MainViewController.m
 //  EventApp
 //
 //  Created by Hanna Rybakova on 7/1/19.
 //  Copyright © 2019 None. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MainViewController.h"
 
-@interface ViewController ()
+@interface MainViewController ()
 
 @end
 
-@implementation ViewController
+@implementation MainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
