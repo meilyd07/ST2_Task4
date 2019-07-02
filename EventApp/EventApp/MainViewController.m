@@ -24,13 +24,28 @@
     label.text = [DateUtil.sharedInstance getCurrentDate];
     [self.view addSubview:label];
     [self updateAuthorizationStatusToAccessEventStore];
+    [self setupNavigationBar];
 }
+
+- (void)setupNavigationBar {
+    self.title = [DateUtil.sharedInstance getCurrentDate];
+    UIFont *font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightSemibold];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:font}];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:font}];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:3.0f/255.0f green:117.0f/255.0f blue:148.0f/255.0f alpha:1.0f]];
+    }
 
 - (EKEventStore *)eventStore {
     if (!_eventStore) {
         _eventStore = [[EKEventStore alloc] init];
     }
     return _eventStore;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
 
 - (void)updateAuthorizationStatusToAccessEventStore {
