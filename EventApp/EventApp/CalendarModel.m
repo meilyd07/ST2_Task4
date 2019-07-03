@@ -10,17 +10,11 @@
 
 @implementation CalendarModel
 
--(NSArray *)arrayOfDates {
+-(NSMutableArray *)arrayOfDates:(NSDate *)startDate {
     
     int numberOfDays = 7;
-    NSDate *startDate = [NSDate date];
-    //formatter.dateFormat = "EEE d/M"
-    //let calendar = Calendar.current
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    //var offset = DateComponents()
     NSDateComponents *offset = [[NSDateComponents alloc] init];
-    //[dateComponent setYear:2020];
-    //var dates: [Any] = [formatter.string(from: startDate)]
     NSMutableArray *dates = [[NSMutableArray alloc] init];
     [dates addObject:startDate];
     

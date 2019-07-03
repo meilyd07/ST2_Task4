@@ -10,18 +10,26 @@
 #import "DateUtil.h"
 #import <EventKit/EventKit.h>
 #import "WeekCell.h"
+#import "CalendarModel.h"
 
 @interface MainViewController ()
 @property (strong, nonatomic) EKEventStore *eventStore;
 @property (nonatomic) BOOL isAccessToEventStoreGranted;
 @property (strong, nonatomic) NSMutableArray *todoEvents;
 @property (strong, nonatomic) UICollectionView *collectionView;
+@property (strong, nonatomic) CalendarModel *model;
+@property (strong, nonatomic) NSMutableArray *weekData;
 @end
 
 @implementation MainViewController
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     WeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WeekCell" forIndexPath:indexPath];
+    cell.dayLabel.text = [DateUtil.sharedInstance getDateNumber:self.weekData[indexPath.row]];
+    [cell.dotLabel setHidden:YES];//to do add condition
+    
+    NSArray *arrWeekDaysNames = @[@"ПН",@"ВТ",@"СР",@"ЧТ",@"ПТ",@"СБ",@"ВС"];
+    cell.weekDayLabel.text = arrWeekDaysNames[indexPath.row];
     
     return cell;
 }
@@ -75,10 +83,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 200)];
-    label.text = [DateUtil.sharedInstance getCurrentDate];
-    [self.view addSubview:label];
     [self updateAuthorizationStatusToAccessEventStore];
+    self.model = [CalendarModel new];
+    self.weekData = [self.model arrayOfDates: [NSDate date]];
     [self setupNavigationBar];
     [self createCollectionView];
 }
@@ -89,7 +96,7 @@
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:font}];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:font}];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:3.0f/255.0f green:117.0f/255.0f blue:148.0f/255.0f alpha:1.0f]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:3.0f/255.0f green:91.0f/255.0f blue:128.0f/255.0f alpha:1.0f]];
     }
 
 - (EKEventStore *)eventStore {

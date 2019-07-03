@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface CalendarModel : NSObject
-
+-(NSMutableArray *)arrayOfDates:(NSDate *)startDate;
 @end
