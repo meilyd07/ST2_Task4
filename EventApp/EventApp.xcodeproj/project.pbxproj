@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6A3AF15122CBF550005D05E9 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AF15022CBF550005D05E9 /* DateUtil.m */; };
+		6A3AF15422CC1D5C005D05E9 /* CalendarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AF15322CC1D5C005D05E9 /* CalendarModel.m */; };
 		6A53C14522C9FA3400E145A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A53C14422C9FA3400E145A7 /* AppDelegate.m */; };
 		6A53C14822C9FA3400E145A7 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A53C14722C9FA3400E145A7 /* MainViewController.m */; };
 		6A53C14D22C9FA3600E145A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A53C14C22C9FA3600E145A7 /* Assets.xcassets */; };
@@ -18,6 +19,8 @@
 /* Begin PBXFileReference section */
 		6A3AF14F22CBF550005D05E9 /* DateUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
 		6A3AF15022CBF550005D05E9 /* DateUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
+		6A3AF15222CC1D5C005D05E9 /* CalendarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarModel.h; sourceTree = "<group>"; };
+		6A3AF15322CC1D5C005D05E9 /* CalendarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarModel.m; sourceTree = "<group>"; };
 		6A53C14022C9FA3400E145A7 /* EventApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A53C14322C9FA3400E145A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6A53C14422C9FA3400E145A7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -62,6 +65,8 @@
 				6A53C14322C9FA3400E145A7 /* AppDelegate.h */,
 				6A53C14422C9FA3400E145A7 /* AppDelegate.m */,
 				6A3AF14F22CBF550005D05E9 /* DateUtil.h */,
+				6A3AF15222CC1D5C005D05E9 /* CalendarModel.h */,
+				6A3AF15322CC1D5C005D05E9 /* CalendarModel.m */,
 				6A3AF15022CBF550005D05E9 /* DateUtil.m */,
 				6A53C14622C9FA3400E145A7 /* MainViewController.h */,
 				6A53C14722C9FA3400E145A7 /* MainViewController.m */,
@@ -145,6 +150,7 @@
 				6A53C14822C9FA3400E145A7 /* MainViewController.m in Sources */,
 				6A3AF15122CBF550005D05E9 /* DateUtil.m in Sources */,
 				6A53C15322C9FA3600E145A7 /* main.m in Sources */,
+				6A3AF15422CC1D5C005D05E9 /* CalendarModel.m in Sources */,
 				6A53C14522C9FA3400E145A7 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

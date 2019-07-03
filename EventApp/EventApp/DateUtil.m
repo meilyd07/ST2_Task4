@@ -24,14 +24,19 @@ static DateUtil *shared = nil;
         NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ru_BY"];
         shared.dateFormatter = [[NSDateFormatter alloc] init];
         shared.dateFormatter.locale = locale;
-        shared.dateFormatter.dateFormat = @"d MMM yyyy";
+        //shared.dateFormatter.dateFormat = @"d MMM yyyy";
     }
     return shared;
 }
 
 - (NSString *) getCurrentDate {
-    
+    shared.dateFormatter.dateFormat = @"d MMM yyyy";
     return [self.dateFormatter stringFromDate:[NSDate date]];
+}
+
+- (NSString *) getDateNumber:(NSDate *)date {
+    shared.dateFormatter.dateFormat = @"d";
+    return [self.dateFormatter stringFromDate:date];
 }
 
 @end
