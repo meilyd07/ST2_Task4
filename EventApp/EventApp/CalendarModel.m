@@ -13,14 +13,21 @@
 -(NSMutableArray *)arrayOfDates:(NSDate *)startDate {
     
     int numberOfDays = 7;
+    NSDate *startOfTheWeek;
     NSCalendar *calendar = [NSCalendar currentCalendar];
+    calendar.firstWeekday = 2;
+    NSTimeInterval interval;
+    [calendar rangeOfUnit:NSCalendarUnitWeekOfYear
+           startDate:&startOfTheWeek
+            interval:&interval
+             forDate:startDate];
     NSDateComponents *offset = [[NSDateComponents alloc] init];
     NSMutableArray *dates = [[NSMutableArray alloc] init];
-    [dates addObject:startDate];
+    [dates addObject:startOfTheWeek];
     
     for(int i= 1; i<numberOfDays; i++) {
         [offset setDay:i];
-        NSDate *nextDate = [calendar dateByAddingComponents:offset toDate:startDate options:NSCalendarMatchFirst];
+        NSDate *nextDate = [calendar dateByAddingComponents:offset toDate:startOfTheWeek options:NSCalendarMatchFirst];
         [dates addObject:nextDate];
     }
     
