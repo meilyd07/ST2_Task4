@@ -9,14 +9,69 @@
 #import "MainViewController.h"
 #import "DateUtil.h"
 #import <EventKit/EventKit.h>
+#import "WeekCell.h"
 
 @interface MainViewController ()
 @property (strong, nonatomic) EKEventStore *eventStore;
 @property (nonatomic) BOOL isAccessToEventStoreGranted;
 @property (strong, nonatomic) NSMutableArray *todoEvents;
+@property (strong, nonatomic) UICollectionView *collectionView;
 @end
 
 @implementation MainViewController
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    WeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WeekCell" forIndexPath:indexPath];
+    
+    return cell;
+}
+
+- (void)createCollectionView {
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    
+    layout.itemSize = CGSizeMake(self.view.frame.size.width/7, 60.0f);
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.minimumInteritemSpacing = 0;
+    layout.minimumLineSpacing = 0;
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 160.0f) collectionViewLayout:layout];
+    [self.collectionView setDataSource:self];
+    [self.collectionView setDelegate:self];
+    [self.view addSubview:self.collectionView];
+
+    [self.collectionView registerNib:[UINib nibWithNibName:@"WeekCell" bundle:nil] forCellWithReuseIdentifier:@"WeekCell"];
+    self.collectionView.backgroundColor = [UIColor colorWithRed:4.0f/255.0f green:116.0f/255.0f blue:146.0f/255.0f alpha:1.0f];
+    [self addCollectionViewConstraints];
+}
+
+- (void)addCollectionViewConstraints {
+    self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.collectionView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:0].active = YES;
+    [self.collectionView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor
+                                                      constant:0].active = YES;
+    [self.collectionView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor
+                                                      constant:0].active = YES;
+    [self.collectionView.heightAnchor constraintEqualToConstant:60].active = YES;
+
+}
+
+- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    layout.itemSize = CGSizeMake(self.view.frame.size.width/7, 60.0f);
+    [layout invalidateLayout];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(self.view.frame.size.width/7, 60.0f);
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 7;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,6 +80,7 @@
     [self.view addSubview:label];
     [self updateAuthorizationStatusToAccessEventStore];
     [self setupNavigationBar];
+    [self createCollectionView];
 }
 
 - (void)setupNavigationBar {
@@ -41,14 +97,6 @@
         _eventStore = [[EKEventStore alloc] init];
     }
     return _eventStore;
-}
-
-- (void)createCollectionView {
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) collectionViewLayout:layout];
-    [collectionView setDataSource:self];
-    [collectionView setDelegate:self];
-    [self.view addSubview:collectionView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

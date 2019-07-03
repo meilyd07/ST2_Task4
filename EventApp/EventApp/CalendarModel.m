@@ -31,13 +31,5 @@
     }
     
     return dates;
-    
-//    for i in 1..<numberOfDays {
-//        offset.day = i
-//        let nextDay: Date? = calendar.date(byAdding: offset, to: startDate)
-//        let nextDayString = formatter.string(from: nextDay!)
-//        dates.append(nextDayString)
-//    }
-//    return dates as NSArray
 }
 @end

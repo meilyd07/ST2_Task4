@@ -14,6 +14,8 @@
 		6A53C14D22C9FA3600E145A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A53C14C22C9FA3600E145A7 /* Assets.xcassets */; };
 		6A53C15022C9FA3600E145A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A53C14E22C9FA3600E145A7 /* LaunchScreen.storyboard */; };
 		6A53C15322C9FA3600E145A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A53C15222C9FA3600E145A7 /* main.m */; };
+		6A8C93B222CCA1B500EE8413 /* WeekCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8C93B022CCA1B500EE8413 /* WeekCell.m */; };
+		6A8C93B322CCA1B500EE8413 /* WeekCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C93B122CCA1B500EE8413 /* WeekCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,9 @@
 		6A53C14F22C9FA3600E145A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A53C15122C9FA3600E145A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A53C15222C9FA3600E145A7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6A8C93AF22CCA1B500EE8413 /* WeekCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeekCell.h; sourceTree = "<group>"; };
+		6A8C93B022CCA1B500EE8413 /* WeekCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeekCell.m; sourceTree = "<group>"; };
+		6A8C93B122CCA1B500EE8413 /* WeekCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeekCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +67,7 @@
 		6A53C14222C9FA3400E145A7 /* EventApp */ = {
 			isa = PBXGroup;
 			children = (
+				6A8C93AE22CCA16500EE8413 /* cells */,
 				6A53C14322C9FA3400E145A7 /* AppDelegate.h */,
 				6A53C14422C9FA3400E145A7 /* AppDelegate.m */,
 				6A3AF14F22CBF550005D05E9 /* DateUtil.h */,
@@ -76,6 +82,16 @@
 				6A53C15222C9FA3600E145A7 /* main.m */,
 			);
 			path = EventApp;
+			sourceTree = "<group>";
+		};
+		6A8C93AE22CCA16500EE8413 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				6A8C93AF22CCA1B500EE8413 /* WeekCell.h */,
+				6A8C93B022CCA1B500EE8413 /* WeekCell.m */,
+				6A8C93B122CCA1B500EE8413 /* WeekCell.xib */,
+			);
+			path = cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,6 +151,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A8C93B322CCA1B500EE8413 /* WeekCell.xib in Resources */,
 				6A53C15022C9FA3600E145A7 /* LaunchScreen.storyboard in Resources */,
 				6A53C14D22C9FA3600E145A7 /* Assets.xcassets in Resources */,
 			);
@@ -148,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A53C14822C9FA3400E145A7 /* MainViewController.m in Sources */,
+				6A8C93B222CCA1B500EE8413 /* WeekCell.m in Sources */,
 				6A3AF15122CBF550005D05E9 /* DateUtil.m in Sources */,
 				6A53C15322C9FA3600E145A7 /* main.m in Sources */,
 				6A3AF15422CC1D5C005D05E9 /* CalendarModel.m in Sources */,
