@@ -47,7 +47,7 @@
     [self.view addSubview:self.collectionView];
 
     [self.collectionView registerNib:[UINib nibWithNibName:@"WeekCell" bundle:nil] forCellWithReuseIdentifier:@"WeekCell"];
-    self.collectionView.backgroundColor = [UIColor colorWithRed:4.0f/255.0f green:116.0f/255.0f blue:146.0f/255.0f alpha:1.0f];
+    self.collectionView.backgroundColor = [UIColor colorWithRed:3.0f/255.0f green:117.0f/255.0f blue:148.0f/255.0f alpha:1.0f];
     [self addCollectionViewConstraints];
 }
 
@@ -96,7 +96,7 @@
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:font}];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:font}];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:3.0f/255.0f green:91.0f/255.0f blue:128.0f/255.0f alpha:1.0f]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:3.0f/255.0f green:117.0f/255.0f blue:148.0f/255.0f alpha:1.0f]];
     }
 
 - (EKEventStore *)eventStore {
