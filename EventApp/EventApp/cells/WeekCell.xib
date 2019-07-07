@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOk-5s-zQt">
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOk-5s-zQt">
                         <rect key="frame" x="9" y="1" width="42" height="42"/>
                         <color key="backgroundColor" red="0.9882352941176471" green="0.40392156862745099" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>

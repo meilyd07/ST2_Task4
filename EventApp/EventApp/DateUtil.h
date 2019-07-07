@@ -13,4 +13,5 @@
 + (DateUtil *) sharedInstance;
 - (NSString *) getCurrentDate;
 - (NSString *) getDateNumber:(NSDate *)date;
+- (NSString *)getDateLocaleFormatted:(NSDate *)date;
 @end

@@ -11,7 +11,6 @@
 @implementation CalendarModel
 
 -(NSMutableArray *)arrayOfDates:(NSDate *)startDate {
-    
     int numberOfDays = 7;
     NSDate *startOfTheWeek;
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -35,10 +34,16 @@
 }
 
 -(NSMutableArray *)changeWeek:(NSDate *)selectedDate byCount:(int)days {
+    NSDate *nextDate = [self changeDate:selectedDate byCount:days];
+    return [self arrayOfDates:nextDate];
+}
+
+-(NSDate *)changeDate:(NSDate *)currentDate byCount:(int)days {
+    
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *offset = [[NSDateComponents alloc] init];
     [offset setDay:days];
-    NSDate *nextDate = [calendar dateByAddingComponents:offset toDate:selectedDate options:NSCalendarMatchFirst];
-    return [self arrayOfDates:nextDate];
+    NSDate *nextDate = [calendar dateByAddingComponents:offset toDate:currentDate options:NSCalendarMatchFirst];
+    return nextDate;
 }
 @end

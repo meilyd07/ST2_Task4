@@ -21,7 +21,7 @@ static DateUtil *shared = nil;
     if (shared == nil)
     {
         shared = [[DateUtil alloc] init];
-        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ru_BY"];
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"];
         shared.dateFormatter = [[NSDateFormatter alloc] init];
         shared.dateFormatter.locale = locale;
         //shared.dateFormatter.dateFormat = @"d MMM yyyy";
@@ -32,6 +32,11 @@ static DateUtil *shared = nil;
 - (NSString *) getCurrentDate {
     shared.dateFormatter.dateFormat = @"d MMM yyyy";
     return [self.dateFormatter stringFromDate:[NSDate date]];
+}
+
+- (NSString *)getDateLocaleFormatted:(NSDate *)date {
+    shared.dateFormatter.dateFormat = @"d MMM yyyy";
+    return [self.dateFormatter stringFromDate:date];
 }
 
 - (NSString *) getDateNumber:(NSDate *)date {

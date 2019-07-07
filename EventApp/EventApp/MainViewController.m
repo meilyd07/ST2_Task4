@@ -19,17 +19,26 @@
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) CalendarModel *model;
 @property (strong, nonatomic) NSMutableArray *weekData;
+@property (strong, nonatomic) NSDate *selectedDate;
 @end
 
 @implementation MainViewController
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     WeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WeekCell" forIndexPath:indexPath];
-    cell.dayLabel.text = [DateUtil.sharedInstance getDateNumber:self.weekData[indexPath.row]];
+    NSDate *date = self.weekData[indexPath.row];
+    
+    cell.dayLabel.text = [DateUtil.sharedInstance getDateNumber:date];
     [cell.dotLabel setHidden:YES];//to do add condition
     
     NSArray *arrWeekDaysNames = @[@"ПН",@"ВТ",@"СР",@"ЧТ",@"ПТ",@"СБ",@"ВС"];
     cell.weekDayLabel.text = arrWeekDaysNames[indexPath.row];
+    
+    if ([[NSCalendar currentCalendar] isDate:self.selectedDate inSameDayAsDate:date]) {
+        [cell.redView setHidden:NO];
+    } else {
+        [cell.redView setHidden:YES];
+    }
     
     return cell;
 }
@@ -85,7 +94,8 @@
     [super viewDidLoad];
     [self updateAuthorizationStatusToAccessEventStore];
     self.model = [CalendarModel new];
-    self.weekData = [self.model arrayOfDates: [NSDate date]];
+    self.selectedDate = [NSDate date];
+    self.weekData = [self.model arrayOfDates: self.selectedDate];
     [self setupNavigationBar];
     [self createCollectionView];
     [self addLeftSwipe];
@@ -105,13 +115,18 @@
 
 -(void)swipeleft:(UISwipeGestureRecognizer*)gestureRecognizer
 {
-    self.weekData = [self.model changeWeek:[NSDate date] byCount:7];
-    [self.collectionView reloadData];
+    [self swipeByCount:7];
 }
 
 -(void)swiperight:(UISwipeGestureRecognizer*)gestureRecognizer
 {
-    self.weekData = [self.model changeWeek:[NSDate date] byCount:-7];
+    [self swipeByCount:-7];
+}
+
+-(void)swipeByCount:(int)days {
+    self.weekData = [self.model changeWeek:self.selectedDate byCount:days];
+    self.selectedDate = [self.model changeDate:self.selectedDate byCount:days];
+    self.title = [DateUtil.sharedInstance getDateLocaleFormatted:self.selectedDate];
     [self.collectionView reloadData];
 }
 
