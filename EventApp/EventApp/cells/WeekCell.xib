@@ -19,6 +19,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOk-5s-zQt">
+                        <rect key="frame" x="9" y="1" width="42" height="42"/>
+                        <color key="backgroundColor" red="0.9882352941176471" green="0.40392156862745099" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="42" id="2Ro-nK-Wp1"/>
+                            <constraint firstAttribute="height" constant="42" id="eJn-wN-lva"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="21"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OmD-4R-U11">
                         <rect key="frame" x="20.5" y="4" width="19" height="21"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
@@ -42,9 +56,11 @@
             <color key="backgroundColor" red="0.011764705882352941" green="0.45882352941176469" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="pBD-86-psY" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="7Yk-Ud-nW2"/>
+                <constraint firstItem="XOk-5s-zQt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="1" id="MNw-Yt-JfP"/>
                 <constraint firstItem="OmD-4R-U11" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="Or4-h4-qf0"/>
                 <constraint firstItem="7bX-Uh-1DW" firstAttribute="bottom" secondItem="pBD-86-psY" secondAttribute="top" constant="1" id="ScG-hy-ICc"/>
                 <constraint firstItem="7bX-Uh-1DW" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="aaI-QN-qpZ"/>
+                <constraint firstItem="XOk-5s-zQt" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="izw-il-Sd5"/>
                 <constraint firstItem="OmD-4R-U11" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="jr3-XD-Eql"/>
                 <constraint firstItem="7bX-Uh-1DW" firstAttribute="top" secondItem="OmD-4R-U11" secondAttribute="bottom" constant="1" id="po7-Lm-Utd"/>
             </constraints>
@@ -52,6 +68,7 @@
             <connections>
                 <outlet property="dayLabel" destination="OmD-4R-U11" id="kY1-o7-Mxj"/>
                 <outlet property="dotLabel" destination="pBD-86-psY" id="Snz-hD-CkK"/>
+                <outlet property="redView" destination="XOk-5s-zQt" id="Q71-U7-Qhu"/>
                 <outlet property="weekDayLabel" destination="7bX-Uh-1DW" id="N93-zi-GpE"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="96.428571428571431"/>

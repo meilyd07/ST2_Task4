@@ -33,4 +33,12 @@
     
     return dates;
 }
+
+-(NSMutableArray *)changeWeek:(NSDate *)selectedDate byCount:(int)days {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *offset = [[NSDateComponents alloc] init];
+    [offset setDay:days];
+    NSDate *nextDate = [calendar dateByAddingComponents:offset toDate:selectedDate options:NSCalendarMatchFirst];
+    return [self arrayOfDates:nextDate];
+}
 @end

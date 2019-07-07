@@ -10,4 +10,5 @@
 
 @interface CalendarModel : NSObject
 -(NSMutableArray *)arrayOfDates:(NSDate *)startDate;
+-(NSMutableArray *)changeWeek:(NSDate *)selectedDate byCount:(int)days;
 @end

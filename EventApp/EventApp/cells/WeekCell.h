@@ -11,5 +11,6 @@
 @interface WeekCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *dayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weekDayLabel;
+@property (weak, nonatomic) IBOutlet UIView *redView;
 @property (weak, nonatomic) IBOutlet UILabel *dotLabel;
 @end

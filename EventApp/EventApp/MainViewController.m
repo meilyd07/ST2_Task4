@@ -88,6 +88,31 @@
     self.weekData = [self.model arrayOfDates: [NSDate date]];
     [self setupNavigationBar];
     [self createCollectionView];
+    [self addLeftSwipe];
+    [self addRightSwipe];
+}
+
+-(void)addRightSwipe {
+    UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swiperight:)];
+    swiperight.direction=UISwipeGestureRecognizerDirectionRight;
+    [self.collectionView addGestureRecognizer:swiperight];}
+
+-(void)addLeftSwipe {
+    UISwipeGestureRecognizer * swipeleft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeleft:)];
+    swipeleft.direction=UISwipeGestureRecognizerDirectionLeft;
+    [self.collectionView addGestureRecognizer:swipeleft];
+}
+
+-(void)swipeleft:(UISwipeGestureRecognizer*)gestureRecognizer
+{
+    self.weekData = [self.model changeWeek:[NSDate date] byCount:7];
+    [self.collectionView reloadData];
+}
+
+-(void)swiperight:(UISwipeGestureRecognizer*)gestureRecognizer
+{
+    self.weekData = [self.model changeWeek:[NSDate date] byCount:-7];
+    [self.collectionView reloadData];
 }
 
 - (void)setupNavigationBar {
