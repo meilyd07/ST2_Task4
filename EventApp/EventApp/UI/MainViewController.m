@@ -7,41 +7,17 @@
 //
 
 #import "MainViewController.h"
-#import "DateUtil.h"
 #import <EventKit/EventKit.h>
 #import "WeekCell.h"
-#import "CalendarModel.h"
 
 @interface MainViewController ()
 @property (strong, nonatomic) EKEventStore *eventStore;
 @property (nonatomic) BOOL isAccessToEventStoreGranted;
 @property (strong, nonatomic) NSMutableArray *todoEvents;
 @property (strong, nonatomic) UICollectionView *collectionView;
-@property (strong, nonatomic) CalendarModel *model;
-@property (strong, nonatomic) NSMutableArray *weekData;
-@property (strong, nonatomic) NSDate *selectedDate;
 @end
 
 @implementation MainViewController
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    WeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WeekCell" forIndexPath:indexPath];
-    NSDate *date = self.weekData[indexPath.row];
-    
-    cell.dayLabel.text = [DateUtil.sharedInstance getDateNumber:date];
-    [cell.dotLabel setHidden:YES];//to do add condition
-    
-    NSArray *arrWeekDaysNames = @[@"ПН",@"ВТ",@"СР",@"ЧТ",@"ПТ",@"СБ",@"ВС"];
-    cell.weekDayLabel.text = arrWeekDaysNames[indexPath.row];
-    
-    if ([[NSCalendar currentCalendar] isDate:self.selectedDate inSameDayAsDate:date]) {
-        [cell.redView setHidden:NO];
-    } else {
-        [cell.redView setHidden:YES];
-    }
-    
-    return cell;
-}
 
 - (void)createCollectionView {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -51,6 +27,7 @@
     layout.minimumInteritemSpacing = 0;
     layout.minimumLineSpacing = 0;
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 160.0f) collectionViewLayout:layout];
+    
     [self.collectionView setDataSource:self];
     [self.collectionView setDelegate:self];
     [self.view addSubview:self.collectionView];
@@ -62,7 +39,11 @@
 
 - (void)addCollectionViewConstraints {
     self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.collectionView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:0].active = YES;
+    if (@available(iOS 11.0, *)) {
+        [self.collectionView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:0].active = YES;
+    } else {
+        [self.collectionView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:0].active = YES;
+    }
     [self.collectionView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor
                                                       constant:0].active = YES;
     [self.collectionView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor
@@ -78,31 +59,10 @@
     [layout invalidateLayout];
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(self.view.frame.size.width/7, 60.0f);
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    WeekCell *cell = (WeekCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    [cell.redView setHidden:NO];
-    self.selectedDate = self.weekData[indexPath.row];
-    [self.collectionView reloadData];
-}
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 7;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self updateAuthorizationStatusToAccessEventStore];
-    self.model = [CalendarModel new];
-    self.selectedDate = [NSDate date];
-    self.weekData = [self.model arrayOfDates: self.selectedDate];
+    [self.viewModel loadWeek];
     [self setupNavigationBar];
     [self createCollectionView];
     [self addLeftSwipe];
@@ -131,20 +91,14 @@
 }
 
 -(void)swipeByCount:(int)days {
-    self.weekData = [self.model changeWeek:self.selectedDate byCount:days];
-    self.selectedDate = [self.model changeDate:self.selectedDate byCount:days];
-    self.title = [DateUtil.sharedInstance getDateLocaleFormatted:self.selectedDate];
+    [self.viewModel loadWeekByCount:days];
+    self.title = [self.viewModel getSelectedDateFormatted];
     [self.collectionView reloadData];
 }
 
 - (void)setupNavigationBar {
-    self.title = [DateUtil.sharedInstance getCurrentDate];
-    UIFont *font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightSemibold];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:font}];
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:font}];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:3.0f/255.0f green:117.0f/255.0f blue:148.0f/255.0f alpha:1.0f]];
-    }
+    self.title = [self.viewModel getSelectedDateFormatted];
+}
 
 - (EKEventStore *)eventStore {
     if (!_eventStore) {
@@ -166,23 +120,16 @@
         case EKAuthorizationStatusDenied:
         case EKAuthorizationStatusRestricted: {
             self.isAccessToEventStoreGranted = NO;
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Access Denied"
-//                                                                message:@"This app doesn't have access to your Reminders." delegate:nil
-//                                                      cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-//            [alertView show];
             //[self.tableView reloadData];
             NSLog(@"This app doesn't have access to your Reminders.");
             break;
         }
-            
-            // 4
         case EKAuthorizationStatusAuthorized:
             self.isAccessToEventStoreGranted = YES;
             NSLog(@"This app has access");
             //[self.tableView reloadData];
             break;
             
-            // 5
         case EKAuthorizationStatusNotDetermined: {
             __weak MainViewController *weakSelf = self;
             [self.eventStore requestAccessToEntityType:EKEntityTypeReminder
@@ -195,6 +142,42 @@
             break;
         }
     }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(self.view.frame.size.width/7, 60.0f);
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    WeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WeekCell" forIndexPath:indexPath];
+    cell.dayLabel.text = [self.viewModel getWeekDateStringBy:indexPath.row];
+    [cell.dotLabel setHidden:YES];//to do add condition
+    
+    NSArray *arrWeekDaysNames = @[@"ПН",@"ВТ",@"СР",@"ЧТ",@"ПТ",@"СБ",@"ВС"];
+    cell.weekDayLabel.text = arrWeekDaysNames[indexPath.row];
+    
+    if ([self.viewModel isSelected:indexPath.row]) {
+        [cell.redView setHidden:NO];
+    } else {
+        [cell.redView setHidden:YES];
+    }
+    
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    WeekCell *cell = (WeekCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell.redView setHidden:NO];
+    [self.viewModel selectDateBy:indexPath.row];
+    [self.collectionView reloadData];
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 7;
 }
 
 

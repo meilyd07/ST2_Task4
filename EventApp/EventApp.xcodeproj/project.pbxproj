@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A010A1522D23AB500DBFA5B /* MainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A010A1422D23AB500DBFA5B /* MainViewModel.m */; };
 		6A3AF15122CBF550005D05E9 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AF15022CBF550005D05E9 /* DateUtil.m */; };
 		6A3AF15422CC1D5C005D05E9 /* CalendarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AF15322CC1D5C005D05E9 /* CalendarModel.m */; };
 		6A53C14522C9FA3400E145A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A53C14422C9FA3400E145A7 /* AppDelegate.m */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A010A1322D23AB500DBFA5B /* MainViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewModel.h; sourceTree = "<group>"; };
+		6A010A1422D23AB500DBFA5B /* MainViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewModel.m; sourceTree = "<group>"; };
 		6A3AF14F22CBF550005D05E9 /* DateUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
 		6A3AF15022CBF550005D05E9 /* DateUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
 		6A3AF15222CC1D5C005D05E9 /* CalendarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarModel.h; sourceTree = "<group>"; };
@@ -48,6 +51,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A010A0F22D23A1900DBFA5B /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6A010A1322D23AB500DBFA5B /* MainViewModel.h */,
+				6A010A1422D23AB500DBFA5B /* MainViewModel.m */,
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
+		6A010A1022D23A2A00DBFA5B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				6A53C14622C9FA3400E145A7 /* MainViewController.h */,
+				6A53C14722C9FA3400E145A7 /* MainViewController.m */,
+				6A8C93AE22CCA16500EE8413 /* cells */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		6A010A1122D23A4800DBFA5B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				6A3AF15222CC1D5C005D05E9 /* CalendarModel.h */,
+				6A3AF15322CC1D5C005D05E9 /* CalendarModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		6A010A1222D23A7800DBFA5B /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				6A3AF14F22CBF550005D05E9 /* DateUtil.h */,
+				6A3AF15022CBF550005D05E9 /* DateUtil.m */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		6A53C13722C9FA3400E145A7 = {
 			isa = PBXGroup;
 			children = (
@@ -67,15 +107,12 @@
 		6A53C14222C9FA3400E145A7 /* EventApp */ = {
 			isa = PBXGroup;
 			children = (
-				6A8C93AE22CCA16500EE8413 /* cells */,
+				6A010A1222D23A7800DBFA5B /* utils */,
+				6A010A1122D23A4800DBFA5B /* model */,
+				6A010A1022D23A2A00DBFA5B /* UI */,
+				6A010A0F22D23A1900DBFA5B /* viewModel */,
 				6A53C14322C9FA3400E145A7 /* AppDelegate.h */,
 				6A53C14422C9FA3400E145A7 /* AppDelegate.m */,
-				6A3AF14F22CBF550005D05E9 /* DateUtil.h */,
-				6A3AF15222CC1D5C005D05E9 /* CalendarModel.h */,
-				6A3AF15322CC1D5C005D05E9 /* CalendarModel.m */,
-				6A3AF15022CBF550005D05E9 /* DateUtil.m */,
-				6A53C14622C9FA3400E145A7 /* MainViewController.h */,
-				6A53C14722C9FA3400E145A7 /* MainViewController.m */,
 				6A53C14C22C9FA3600E145A7 /* Assets.xcassets */,
 				6A53C14E22C9FA3600E145A7 /* LaunchScreen.storyboard */,
 				6A53C15122C9FA3600E145A7 /* Info.plist */,
@@ -164,6 +201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A010A1522D23AB500DBFA5B /* MainViewModel.m in Sources */,
 				6A53C14822C9FA3400E145A7 /* MainViewController.m in Sources */,
 				6A8C93B222CCA1B500EE8413 /* WeekCell.m in Sources */,
 				6A3AF15122CBF550005D05E9 /* DateUtil.m in Sources */,
@@ -306,6 +344,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BL2QCUUKYP;
 				INFOPLIST_FILE = EventApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -323,6 +362,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BL2QCUUKYP;
 				INFOPLIST_FILE = EventApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "MainViewModel.h"
 
 @interface AppDelegate ()
 
@@ -20,8 +21,13 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     MainViewController *mainViewController = [MainViewController new];
+    MainViewModel *viewModel = [MainViewModel new];
+    mainViewController.viewModel = viewModel;
     [mainViewController.view setBackgroundColor:[UIColor whiteColor]];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    UIFont *font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightSemibold];
+   [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:font}];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:3.0f/255.0f green:117.0f/255.0f blue:148.0f/255.0f alpha:1.0f]];
     [self.window setRootViewController:navigationController];
     [self.window makeKeyAndVisible];
     return YES;

@@ -13,5 +13,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *weekDayLabel;
 @property (weak, nonatomic) IBOutlet UIView *redView;
 @property (weak, nonatomic) IBOutlet UILabel *dotLabel;
-@property (assign, nonatomic) BOOL selectedDate;
 @end
