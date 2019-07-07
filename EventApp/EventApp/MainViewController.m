@@ -82,6 +82,13 @@
     return CGSizeMake(self.view.frame.size.width/7, 60.0f);
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    WeekCell *cell = (WeekCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell.redView setHidden:NO];
+    self.selectedDate = self.weekData[indexPath.row];
+    [self.collectionView reloadData];
+}
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
