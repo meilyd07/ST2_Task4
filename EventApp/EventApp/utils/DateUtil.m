@@ -29,13 +29,8 @@ static DateUtil *shared = nil;
     return shared;
 }
 
-- (NSString *) getCurrentDate {
-    shared.dateFormatter.dateFormat = @"d MMM yyyy";
-    return [self.dateFormatter stringFromDate:[NSDate date]];
-}
-
 - (NSString *)getDateLocaleFormatted:(NSDate *)date {
-    shared.dateFormatter.dateFormat = @"d MMM yyyy";
+    shared.dateFormatter.dateFormat = @"d MMMM yyyy";
     return [self.dateFormatter stringFromDate:date];
 }
 

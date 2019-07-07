@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "MainViewModel.h"
+#import "OnDateChangedProtocolDelegate.h"
 
-@interface MainViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface MainViewController : UIViewController <OnDateChangedProtocolDelegate>
 @property (strong, nonatomic) MainViewModel *viewModel;
 @end
 
