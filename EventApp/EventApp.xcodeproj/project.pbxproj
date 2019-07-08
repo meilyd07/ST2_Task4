@@ -19,6 +19,10 @@
 		6A8C93B322CCA1B500EE8413 /* WeekCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A8C93B122CCA1B500EE8413 /* WeekCell.xib */; };
 		6ACCF50722D2A8AD00E28B00 /* MainCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACCF50622D2A8AD00E28B00 /* MainCollectionViewLayout.m */; };
 		6ACCF50B22D2ABB900E28B00 /* WeekCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACCF50A22D2ABB900E28B00 /* WeekCollectionViewDelegate.m */; };
+		6ACCF51022D2B7E000E28B00 /* MainCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACCF50F22D2B7E000E28B00 /* MainCollectionViewDelegate.m */; };
+		6ACCF51422D2BF1500E28B00 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACCF51222D2BF1500E28B00 /* EventCell.m */; };
+		6ACCF51522D2BF1500E28B00 /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF51322D2BF1500E28B00 /* EventCell.xib */; };
+		6ACCF51822D2C67200E28B00 /* QuoterReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ACCF51722D2C67200E28B00 /* QuoterReusableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +49,13 @@
 		6ACCF50922D2ABB900E28B00 /* WeekCollectionViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeekCollectionViewDelegate.h; sourceTree = "<group>"; };
 		6ACCF50A22D2ABB900E28B00 /* WeekCollectionViewDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeekCollectionViewDelegate.m; sourceTree = "<group>"; };
 		6ACCF50C22D2AFB000E28B00 /* OnDateChangedProtocolDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OnDateChangedProtocolDelegate.h; sourceTree = "<group>"; };
+		6ACCF50E22D2B7E000E28B00 /* MainCollectionViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainCollectionViewDelegate.h; sourceTree = "<group>"; };
+		6ACCF50F22D2B7E000E28B00 /* MainCollectionViewDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainCollectionViewDelegate.m; sourceTree = "<group>"; };
+		6ACCF51122D2BF1500E28B00 /* EventCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
+		6ACCF51222D2BF1500E28B00 /* EventCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
+		6ACCF51322D2BF1500E28B00 /* EventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
+		6ACCF51622D2C67200E28B00 /* QuoterReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuoterReusableView.h; sourceTree = "<group>"; };
+		6ACCF51722D2C67200E28B00 /* QuoterReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuoterReusableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,10 +81,9 @@
 		6A010A1022D23A2A00DBFA5B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6ACCF50D22D2B79C00E28B00 /* main */,
 				6ACCF50822D2AB8600E28B00 /* week */,
 				6A53C14622C9FA3400E145A7 /* MainViewController.h */,
-				6ACCF50522D2A8AD00E28B00 /* MainCollectionViewLayout.h */,
-				6ACCF50622D2A8AD00E28B00 /* MainCollectionViewLayout.m */,
 				6A53C14722C9FA3400E145A7 /* MainViewController.m */,
 				6A8C93AE22CCA16500EE8413 /* cells */,
 			);
@@ -137,6 +147,11 @@
 				6A8C93AF22CCA1B500EE8413 /* WeekCell.h */,
 				6A8C93B022CCA1B500EE8413 /* WeekCell.m */,
 				6A8C93B122CCA1B500EE8413 /* WeekCell.xib */,
+				6ACCF51122D2BF1500E28B00 /* EventCell.h */,
+				6ACCF51222D2BF1500E28B00 /* EventCell.m */,
+				6ACCF51322D2BF1500E28B00 /* EventCell.xib */,
+				6ACCF51622D2C67200E28B00 /* QuoterReusableView.h */,
+				6ACCF51722D2C67200E28B00 /* QuoterReusableView.m */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -149,6 +164,17 @@
 				6ACCF50C22D2AFB000E28B00 /* OnDateChangedProtocolDelegate.h */,
 			);
 			path = week;
+			sourceTree = "<group>";
+		};
+		6ACCF50D22D2B79C00E28B00 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				6ACCF50522D2A8AD00E28B00 /* MainCollectionViewLayout.h */,
+				6ACCF50622D2A8AD00E28B00 /* MainCollectionViewLayout.m */,
+				6ACCF50E22D2B7E000E28B00 /* MainCollectionViewDelegate.h */,
+				6ACCF50F22D2B7E000E28B00 /* MainCollectionViewDelegate.m */,
+			);
+			path = main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ACCF51522D2BF1500E28B00 /* EventCell.xib in Resources */,
 				6A8C93B322CCA1B500EE8413 /* WeekCell.xib in Resources */,
 				6A53C15022C9FA3600E145A7 /* LaunchScreen.storyboard in Resources */,
 				6A53C14D22C9FA3600E145A7 /* Assets.xcassets in Resources */,
@@ -221,10 +248,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ACCF51022D2B7E000E28B00 /* MainCollectionViewDelegate.m in Sources */,
 				6A010A1522D23AB500DBFA5B /* MainViewModel.m in Sources */,
 				6ACCF50B22D2ABB900E28B00 /* WeekCollectionViewDelegate.m in Sources */,
 				6A53C14822C9FA3400E145A7 /* MainViewController.m in Sources */,
 				6A8C93B222CCA1B500EE8413 /* WeekCell.m in Sources */,
+				6ACCF51822D2C67200E28B00 /* QuoterReusableView.m in Sources */,
+				6ACCF51422D2BF1500E28B00 /* EventCell.m in Sources */,
 				6A3AF15122CBF550005D05E9 /* DateUtil.m in Sources */,
 				6A53C15322C9FA3600E145A7 /* main.m in Sources */,
 				6A3AF15422CC1D5C005D05E9 /* CalendarModel.m in Sources */,

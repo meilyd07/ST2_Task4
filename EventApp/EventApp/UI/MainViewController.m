@@ -10,6 +10,8 @@
 #import <EventKit/EventKit.h>
 #import "MainCollectionViewLayout.h"
 #import "WeekCollectionViewDelegate.h"
+#import "MainCollectionViewDelegate.h"
+#import "QuoterReusableView.h"
 
 @interface MainViewController ()
 @property (strong, nonatomic) EKEventStore *eventStore;
@@ -18,6 +20,7 @@
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) UICollectionView *mainCollectionView;
 @property (strong, nonatomic) WeekCollectionViewDelegate *weekDelegate;
+@property (strong, nonatomic) MainCollectionViewDelegate *mainDelegate;
 @end
 
 @implementation MainViewController
@@ -44,18 +47,31 @@
     [self addCollectionViewConstraints];
 }
 
-//- (void)createMainCollectionView {
-//    MainCollectionViewLayout *layout = [MainCollectionViewLayout new];
-//    self.mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-//    self.mainCollectionView.backgroundColor = [UIColor whiteColor];
-//    self.mainCollectionView.dataSource = self;
-//    self.mainCollectionView.delegate = self;
-//    [self addMainCollectionViewConstraints];
-//}
-//
-//- (void)addMainCollectionViewConstraints {
-//
-//}
+- (void)createMainCollectionView {
+    MainCollectionViewLayout *layout = [MainCollectionViewLayout new];
+    self.mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    self.mainCollectionView.backgroundColor = [UIColor whiteColor];
+    self.mainDelegate = [MainCollectionViewDelegate new];
+    //set properties to do
+    
+    [self.mainCollectionView setDataSource:self.mainDelegate];
+    [self.mainCollectionView setDelegate:self.mainDelegate];
+    [self.view addSubview:self.mainCollectionView];
+    
+    [self.mainCollectionView registerNib:[UINib nibWithNibName:@"EventCell" bundle:nil] forCellWithReuseIdentifier:@"EventCell"];
+    [self.mainCollectionView registerClass:[QuoterReusableView class] forSupplementaryViewOfKind:@"quoter" withReuseIdentifier:@"quoter"];
+    [self addMainCollectionViewConstraints];
+}
+
+- (void)addMainCollectionViewConstraints {
+    self.mainCollectionView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.mainCollectionView.topAnchor constraintEqualToAnchor:self.collectionView.bottomAnchor constant:0].active = YES;
+    [self.mainCollectionView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:0].active = YES;
+    [self.mainCollectionView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor
+                                                      constant:0].active = YES;
+    [self.mainCollectionView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor
+                                                       constant:0].active = YES;
+}
 
 - (void)addCollectionViewConstraints {
     self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -86,6 +102,7 @@
     [self createCollectionView];
     [self addLeftSwipe];
     [self addRightSwipe];
+    [self createMainCollectionView];
 }
 
 -(void)addRightSwipe {
@@ -143,14 +160,14 @@
         case EKAuthorizationStatusDenied:
         case EKAuthorizationStatusRestricted: {
             self.isAccessToEventStoreGranted = NO;
-            //[self.tableView reloadData];
+            [self.mainCollectionView reloadData];
             NSLog(@"This app doesn't have access to your Reminders.");
             break;
         }
         case EKAuthorizationStatusAuthorized:
             self.isAccessToEventStoreGranted = YES;
             NSLog(@"This app has access");
-            //[self.tableView reloadData];
+            [self.mainCollectionView reloadData];
             break;
             
         case EKAuthorizationStatusNotDetermined: {
@@ -159,7 +176,7 @@
                                             completion:^(BOOL granted, NSError *error) {
                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                     weakSelf.isAccessToEventStoreGranted = granted;
-                                                    //[weakSelf.tableView reloadData];
+                                                    [weakSelf.mainCollectionView reloadData];
                                                 });
                                             }];
             break;
