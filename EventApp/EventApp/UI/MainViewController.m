@@ -14,7 +14,7 @@
 #import "QuoterReusableView.h"
 
 @interface MainViewController ()
-@property (strong, nonatomic) EKEventStore *eventStore;
+//@property (strong, nonatomic) EKEventStore *eventStore;
 @property (nonatomic) BOOL isAccessToEventStoreGranted;
 @property (strong, nonatomic) NSMutableArray *todoEvents;
 @property (strong, nonatomic) UICollectionView *collectionView;
@@ -102,6 +102,7 @@
     [self createCollectionView];
     [self addLeftSwipe];
     [self addRightSwipe];
+    [self.viewModel loadCalendars];
     [self createMainCollectionView];
 }
 
@@ -140,13 +141,6 @@
     [self setNavigationBarTitle];
 }
 
-- (EKEventStore *)eventStore {
-    if (!_eventStore) {
-        _eventStore = [[EKEventStore alloc] init];
-    }
-    return _eventStore;
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
@@ -154,14 +148,14 @@
 }
 
 - (void)updateAuthorizationStatusToAccessEventStore {
-    EKAuthorizationStatus authorizationStatus = [EKEventStore authorizationStatusForEntityType:EKEntityTypeReminder];
+    EKAuthorizationStatus authorizationStatus = [EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent];
     
     switch (authorizationStatus) {
         case EKAuthorizationStatusDenied:
         case EKAuthorizationStatusRestricted: {
             self.isAccessToEventStoreGranted = NO;
             [self.mainCollectionView reloadData];
-            NSLog(@"This app doesn't have access to your Reminders.");
+            NSLog(@"This app doesn't have access to your Events.");
             break;
         }
         case EKAuthorizationStatusAuthorized:
@@ -172,7 +166,7 @@
             
         case EKAuthorizationStatusNotDetermined: {
             __weak MainViewController *weakSelf = self;
-            [self.eventStore requestAccessToEntityType:EKEntityTypeReminder
+            [self.viewModel.eventStore requestAccessToEntityType:EKEntityTypeEvent
                                             completion:^(BOOL granted, NSError *error) {
                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                     weakSelf.isAccessToEventStoreGranted = granted;

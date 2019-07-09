@@ -9,6 +9,7 @@
 #import "MainViewModel.h"
 #import "CalendarModel.h"
 #import "DateUtil.h"
+#import <EventKit/EventKit.h>
 
 @interface MainViewModel()
 @property (strong, nonatomic) NSMutableArray *weekData;
@@ -24,6 +25,24 @@
     self.model = [CalendarModel new];
     self.selectedDate = [NSDate date];
     return self;
+}
+
+- (EKEventStore *)eventStore {
+    if (!_eventStore) {
+        _eventStore = [[EKEventStore alloc] init];
+    }
+    return _eventStore;
+}
+
+-(void)loadCalendars {
+    _eventCalendars = [[NSMutableArray alloc] init];
+    NSArray *phoneCalendarArray = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
+    
+    for (EKCalendar *systemCalendar in phoneCalendarArray)
+    {
+        NSLog(@"%@", systemCalendar.title);
+        [_eventCalendars addObject:systemCalendar];
+    }
 }
 
 -(void)loadWeek {
