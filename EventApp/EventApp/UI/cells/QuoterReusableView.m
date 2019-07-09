@@ -7,10 +7,11 @@
 //
 
 #import "QuoterReusableView.h"
+#import "H3DottedLine.h"
 
 @interface QuoterReusableView()
 @property (nonatomic) UILabel *timeLabel;
-@property (nonatomic) UIView *timeLineView;
+@property (nonatomic) H3DottedLine *timeLineView;
 @end
 
 @implementation QuoterReusableView
@@ -18,13 +19,12 @@
 {
     if (self = [super initWithFrame:frame]) {
         self.timeLabel = [UILabel new];
-        self.timeLabel.font = [UIFont systemFontOfSize:10];
-        self.timeLabel.textColor = [UIColor blackColor];
+        self.timeLabel.font = [UIFont systemFontOfSize:15];
+        self.timeLabel.textColor = [UIColor colorWithRed:56.0f/255.0f green:56.0f/255.0f blue:56.0f/255.0f alpha:1.0f];
         self.timeLabel.textAlignment = NSTextAlignmentRight;
         [self addSubview:self.timeLabel];
         
-        self.timeLineView = [UIView new];
-        self.timeLineView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2f];
+        self.timeLineView = [H3DottedLine new];
         [self addSubview:self.timeLineView];
     }
     return self;
@@ -35,12 +35,13 @@
     [super layoutSubviews];
     CGRect timeLabelFrame = self.timeLabel.frame;
     timeLabelFrame.origin.x = 2;
-    timeLabelFrame.origin.y = 0;
-    timeLabelFrame.size.width = 24;
+    timeLabelFrame.origin.y = 15;
+    timeLabelFrame.size.width = 60;
     self.timeLabel.frame = timeLabelFrame;
-    
-    CGRect timeLineFrame = CGRectMake(CGRectGetMaxX(timeLabelFrame) + 5, 6.0f, self.bounds.size.width - CGRectGetMaxX(timeLabelFrame) - 10, 0.5f);
+ 
+    CGRect timeLineFrame = CGRectMake(10.0f, 6.0f, self.bounds.size.width - 20, 0.5f);
     self.timeLineView.frame = timeLineFrame;
+    self.timeLineView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)setTime:(NSString *)time

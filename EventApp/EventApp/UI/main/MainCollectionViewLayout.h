@@ -11,3 +11,8 @@
 @interface MainCollectionViewLayout : UICollectionViewLayout
 
 @end
+
+@protocol CalendarViewLayoutDelegate <NSObject>
+- (NSRange)calendarViewLayout:(MainCollectionViewLayout *)layout timespanForCellAtIndexPath:(NSIndexPath *)indexPath;
+
+@end

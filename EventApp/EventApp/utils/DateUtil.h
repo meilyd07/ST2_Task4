@@ -13,4 +13,5 @@
 + (DateUtil *) sharedInstance;
 - (NSString *) getDateNumber:(NSDate *)date;
 - (NSString *)getDateLocaleFormatted:(NSDate *)date;
+- (NSString *)timeFormatted:(int)totalMinutes;
 @end

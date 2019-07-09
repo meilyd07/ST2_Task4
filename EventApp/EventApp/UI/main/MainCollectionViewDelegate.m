@@ -9,6 +9,7 @@
 #import "MainCollectionViewDelegate.h"
 #import "EventCell.h"
 #import "QuoterReusableView.h"
+#import "DateUtil.h"
 
 @implementation MainCollectionViewDelegate
 
@@ -26,6 +27,8 @@
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     QuoterReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"quoter" forIndexPath:indexPath];
+    int minutes = indexPath.item * 15;
+    [view setTime:[DateUtil.sharedInstance timeFormatted:minutes]];
     return view;
 }
 

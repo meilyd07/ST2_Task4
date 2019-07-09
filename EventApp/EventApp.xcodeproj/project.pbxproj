@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6A010A1522D23AB500DBFA5B /* MainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A010A1422D23AB500DBFA5B /* MainViewModel.m */; };
+		6A1A469C22D40B0B0091B48A /* H3DottedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1A469B22D40B0B0091B48A /* H3DottedLine.m */; };
 		6A3AF15122CBF550005D05E9 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AF15022CBF550005D05E9 /* DateUtil.m */; };
 		6A3AF15422CC1D5C005D05E9 /* CalendarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AF15322CC1D5C005D05E9 /* CalendarModel.m */; };
 		6A53C14522C9FA3400E145A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A53C14422C9FA3400E145A7 /* AppDelegate.m */; };
@@ -28,6 +29,8 @@
 /* Begin PBXFileReference section */
 		6A010A1322D23AB500DBFA5B /* MainViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewModel.h; sourceTree = "<group>"; };
 		6A010A1422D23AB500DBFA5B /* MainViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewModel.m; sourceTree = "<group>"; };
+		6A1A469A22D40B0B0091B48A /* H3DottedLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H3DottedLine.h; sourceTree = "<group>"; };
+		6A1A469B22D40B0B0091B48A /* H3DottedLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = H3DottedLine.m; sourceTree = "<group>"; };
 		6A3AF14F22CBF550005D05E9 /* DateUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
 		6A3AF15022CBF550005D05E9 /* DateUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
 		6A3AF15222CC1D5C005D05E9 /* CalendarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarModel.h; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 				6ACCF51322D2BF1500E28B00 /* EventCell.xib */,
 				6ACCF51622D2C67200E28B00 /* QuoterReusableView.h */,
 				6ACCF51722D2C67200E28B00 /* QuoterReusableView.m */,
+				6A1A469A22D40B0B0091B48A /* H3DottedLine.h */,
+				6A1A469B22D40B0B0091B48A /* H3DottedLine.m */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 				6A53C15322C9FA3600E145A7 /* main.m in Sources */,
 				6A3AF15422CC1D5C005D05E9 /* CalendarModel.m in Sources */,
 				6A53C14522C9FA3400E145A7 /* AppDelegate.m in Sources */,
+				6A1A469C22D40B0B0091B48A /* H3DottedLine.m in Sources */,
 				6ACCF50722D2A8AD00E28B00 /* MainCollectionViewLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

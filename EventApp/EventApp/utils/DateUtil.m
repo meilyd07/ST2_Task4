@@ -39,4 +39,12 @@ static DateUtil *shared = nil;
     return [self.dateFormatter stringFromDate:date];
 }
 
+- (NSString *)timeFormatted:(int)totalMinutes
+{
+    int minutes = totalMinutes % 60;
+    int hours = totalMinutes / 60;
+    
+    return [NSString stringWithFormat:@"%02d:%02d",hours, minutes];
+}
+
 @end
