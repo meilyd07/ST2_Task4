@@ -102,7 +102,10 @@
     [self createCollectionView];
     [self addLeftSwipe];
     [self addRightSwipe];
-    [self.viewModel loadCalendars];
+    if (self.isAccessToEventStoreGranted) {
+        [self.viewModel loadCalendars];
+        [self.viewModel loadEventsForWeek];
+    }
     [self createMainCollectionView];
 }
 
@@ -137,6 +140,7 @@
 }
 
 - (void)onDateChanged {
+    [self.viewModel loadEventsForWeek];
     [self.collectionView reloadData];
     [self setNavigationBarTitle];
 }
@@ -170,6 +174,8 @@
                                             completion:^(BOOL granted, NSError *error) {
                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                     weakSelf.isAccessToEventStoreGranted = granted;
+                                                    [weakSelf.viewModel loadCalendars];
+                                                    [self.viewModel loadEventsForWeek];
                                                     [weakSelf.mainCollectionView reloadData];
                                                 });
                                             }];

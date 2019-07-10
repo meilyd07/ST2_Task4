@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSMutableArray *weekData;
 @property (strong, nonatomic) NSDate *selectedDate;
 @property (strong, nonatomic) CalendarModel *model;
+@property (copy, nonatomic) NSArray *allEvents;
 @end
 
 @implementation MainViewModel
@@ -32,6 +33,18 @@
         _eventStore = [[EKEventStore alloc] init];
     }
     return _eventStore;
+}
+
+-(void)loadEventsForWeek {
+    NSDate *startDate = (NSDate *)self.weekData.firstObject;
+    NSDate *stopDate = (NSDate *)self.weekData.lastObject;
+    [self loadEventsForPeriod:startDate stopDate:stopDate];
+}
+
+-(void)loadEventsForPeriod:(NSDate *)startDate stopDate:(NSDate *)stopDate {
+    NSPredicate *predicate = [self.eventStore predicateForEventsWithStartDate:startDate endDate:stopDate calendars:_eventCalendars];
+    self.allEvents = [NSArray new];
+    self.allEvents = [self.eventStore eventsMatchingPredicate:predicate];
 }
 
 -(void)loadCalendars {

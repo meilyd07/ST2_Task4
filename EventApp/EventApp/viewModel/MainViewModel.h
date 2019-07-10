@@ -21,4 +21,5 @@
 -(BOOL)isSelected:(NSInteger)index;
 
 -(void)loadCalendars;
+-(void)loadEventsForWeek;
 @end
