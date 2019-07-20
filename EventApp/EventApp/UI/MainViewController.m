@@ -12,13 +12,14 @@
 #import "WeekCollectionViewDelegate.h"
 #import "MainCollectionViewDelegate.h"
 #import "QuoterReusableView.h"
+#import "EventsCollectionView.h"
 
 @interface MainViewController ()
 //@property (strong, nonatomic) EKEventStore *eventStore;
 @property (nonatomic) BOOL isAccessToEventStoreGranted;
 @property (strong, nonatomic) NSMutableArray *todoEvents;
 @property (strong, nonatomic) UICollectionView *collectionView;
-@property (strong, nonatomic) UICollectionView *mainCollectionView;
+@property (strong, nonatomic) EventsCollectionView *mainCollectionView;
 @property (strong, nonatomic) WeekCollectionViewDelegate *weekDelegate;
 @property (strong, nonatomic) MainCollectionViewDelegate *mainDelegate;
 @end
@@ -49,13 +50,14 @@
 
 - (void)createMainCollectionView {
     MainCollectionViewLayout *layout = [MainCollectionViewLayout new];
-    self.mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    self.mainCollectionView = [[EventsCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     self.mainCollectionView.backgroundColor = [UIColor whiteColor];
     self.mainDelegate = [MainCollectionViewDelegate new];
-    //set properties to do
+    self.mainDelegate.viewModel = self.viewModel;
     
     [self.mainCollectionView setDataSource:self.mainDelegate];
     [self.mainCollectionView setDelegate:self.mainDelegate];
+    self.mainCollectionView.timeSpanDelegate = self.mainDelegate;
     [self.view addSubview:self.mainCollectionView];
     
     [self.mainCollectionView registerNib:[UINib nibWithNibName:@"EventCell" bundle:nil] forCellWithReuseIdentifier:@"EventCell"];
@@ -141,6 +143,7 @@
 
 - (void)onDateChanged {
     [self.viewModel loadEventsForWeek];
+    [self.viewModel loadEventsForSelectedDay];
     [self.collectionView reloadData];
     [self setNavigationBarTitle];
 }

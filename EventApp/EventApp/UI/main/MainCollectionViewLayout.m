@@ -7,17 +7,17 @@
 //
 
 #import "MainCollectionViewLayout.h"
-
+#import "MainCollectionViewLayoutDelegate.h"
+#import "EventsCollectionView.h"
 
 static const CGFloat CalendarViewLayoutQuoterViewHeight = 35.0f;
-static const CGFloat CalendarViewLayoutLeftPadding = 30.0f;
+static const CGFloat CalendarViewLayoutLeftPadding = 80.0f;
 static const CGFloat CalendarViewLayoutRightPadding = 10.0f;
-static const CGFloat CalendarViewLayoutTimeLinePadding = 6.0f;
-static const int DayQuoters = 96;
+static const CGFloat CalendarViewLayoutTimeLinePadding = 11.0f;
+static const int DayQuoters = 97;
 
 @interface MainCollectionViewLayout()
 @property (strong, nonatomic) NSMutableArray *cellAttributes;
-//@property (strong, nonatomic) NSMutableArray *hourAttributes;
 @property (strong, nonatomic) NSMutableArray *quoterAttributes;
 @end
 
@@ -27,7 +27,6 @@ static const int DayQuoters = 96;
 {
     if (self = [super init]) {
         self.cellAttributes = [NSMutableArray new];
-        //self.hourAttributes = [NSMutableArray new];
         self.quoterAttributes = [NSMutableArray new];
     }
     return self;
@@ -35,27 +34,31 @@ static const int DayQuoters = 96;
 
 - (CGSize)collectionViewContentSize
 {
-    // We need to add a padding since the last few pixels of every hour block are displayed in the next block (all but the last hour block, hence the padding)
     return CGSizeMake(self.collectionView.bounds.size.width, CalendarViewLayoutQuoterViewHeight * DayQuoters + CalendarViewLayoutTimeLinePadding);
 }
 
 - (void)prepareLayout
 {
     [self.cellAttributes removeAllObjects];
-    //[self.hourAttributes removeAllObjects];
     [self.quoterAttributes removeAllObjects];
     
-    if ([self.collectionView.delegate conformsToProtocol:@protocol(CalendarViewLayoutDelegate)]) {
-        id <CalendarViewLayoutDelegate> calendarViewLayoutDelegate = (id <CalendarViewLayoutDelegate>)self.collectionView.delegate;
+    if ([((EventsCollectionView *)self.collectionView).timeSpanDelegate conformsToProtocol:@protocol(MainCollectionViewLayoutDelegate)]) {
+        id <MainCollectionViewLayoutDelegate> mainCollectionViewLayoutDelegate = (id <MainCollectionViewLayoutDelegate>)((EventsCollectionView *)self.collectionView).timeSpanDelegate;
         
         // Compute every events layoutAttributes
         for (NSInteger i = 0; i < [self.collectionView numberOfSections]; i++) {
             for (NSInteger j = 0; j < [self.collectionView numberOfItemsInSection:i]; j++) {
                 NSIndexPath *cellIndexPath = [NSIndexPath indexPathForItem:j inSection:i];
-                NSRange timespan = [calendarViewLayoutDelegate calendarViewLayout:self timespanForCellAtIndexPath:cellIndexPath];
-                // Since the actual "line" in every hour block start a few pixels below the cell's top border,  give that same padding to every event time.
-                CGFloat posY = timespan.location / 60.0f + CalendarViewLayoutTimeLinePadding;
-                CGFloat height = timespan.length / 60.0f;
+                NSRange timespan = [mainCollectionViewLayoutDelegate mainCollectionViewLayout:self timespanForCellAtIndexPath:cellIndexPath]; //TO DO
+                
+//                NSUInteger i = 1800;//TEMPORARY
+//                NSUInteger j = 3600;
+//                NSRange range = NSMakeRange(i, j);
+//                NSRange timespan = range;
+                //NSUInteger minutes = i / 60 / 15 * CalendarViewLayoutQuoterViewHeight + CalendarViewLayoutQuoterViewHeight + CalendarViewLayoutTimeLinePadding;
+                //CGFloat posY = minutes;//timespan.location / 60.0f + CalendarViewLayoutTimeLinePadding;
+                CGFloat posY = timespan.location / 60.0f / 15.0f + CalendarViewLayoutTimeLinePadding;
+                CGFloat height = timespan.length / 35.0f;
                 
                 UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:cellIndexPath];
                 CGRect attributesFrame = attributes.frame;
@@ -73,12 +76,10 @@ static const int DayQuoters = 96;
         CGRect attributesFrame = CGRectZero;
         attributesFrame.size = CGSizeMake(self.collectionView.bounds.size.width, CalendarViewLayoutQuoterViewHeight);
         if (i == (DayQuoters - 1)) {
-            // Since it is the last hour block, we need to add the padding that was in every other block's beginning (before the line).
             attributesFrame.size.height += CalendarViewLayoutTimeLinePadding;
         }
         attributesFrame.origin = CGPointMake(0, i * CalendarViewLayoutQuoterViewHeight);
         attributes.frame = attributesFrame;
-        //[self.hourAttributes addObject:attributes];
         [self.quoterAttributes addObject:attributes];
     }
 }

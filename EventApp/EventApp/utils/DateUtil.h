@@ -14,4 +14,6 @@
 - (NSString *) getDateNumber:(NSDate *)date;
 - (NSString *)getDateLocaleFormatted:(NSDate *)date;
 - (NSString *)timeFormatted:(int)totalMinutes;
+- (NSDate *)dateWithOutTime:(NSDate *)datDate;
+- (NSDate *)nextDay:(NSDate *)datDate;
 @end

@@ -47,4 +47,20 @@ static DateUtil *shared = nil;
     return [NSString stringWithFormat:@"%02d:%02d",hours, minutes];
 }
 
+-(NSDate *)dateWithOutTime:(NSDate *)datDate {
+    if( datDate == nil ) {
+        datDate = [NSDate date];
+    }
+    NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:datDate];
+    return [[NSCalendar currentCalendar] dateFromComponents:comps];
+}
+
+-(NSDate *)nextDay:(NSDate *)datDate {
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    components.day = [[NSCalendar currentCalendar] ordinalityOfUnit:(NSCalendarUnitDay) inUnit:(NSCalendarUnitEra) forDate:datDate];
+    components.day += 1;
+    NSDate *dayEnd = [[NSCalendar currentCalendar] dateFromComponents:components];
+    return dayEnd;
+}
+
 @end

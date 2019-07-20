@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MainCollectionViewLayout.h"
+#import "MainCollectionViewLayoutDelegate.h"
+#import "MainViewModel.h"
 
-@interface MainCollectionViewDelegate : NSObject <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
-
+@interface MainCollectionViewDelegate : NSObject <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, MainCollectionViewLayoutDelegate>
+@property (weak, nonatomic) MainViewModel *viewModel;
 @end

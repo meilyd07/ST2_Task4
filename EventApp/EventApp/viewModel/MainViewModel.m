@@ -47,6 +47,30 @@
     self.allEvents = [self.eventStore eventsMatchingPredicate:predicate];
 }
 
+-(void)loadEventsForSelectedDay {
+    NSDate *fromStartOfDay = [DateUtil.sharedInstance dateWithOutTime:self.selectedDate];
+    NSDate *fromEnd = [DateUtil.sharedInstance nextDay:self.selectedDate];
+    NSPredicate *predicate = [self.eventStore predicateForEventsWithStartDate:fromStartOfDay endDate:fromEnd calendars:_eventCalendars];
+    self.allEvents = [NSArray new];
+    self.allEvents = [self.eventStore eventsMatchingPredicate:predicate];
+}
+
+-(NSString *)getEventTextForRow:(NSInteger)index {
+    return ((EKEvent *)self.allEvents[index]).title;
+}
+
+-(NSDate *)getEventStartDateForRow:(NSInteger)index {
+    return ((EKEvent *)self.allEvents[index]).startDate;
+}
+
+-(NSDate *)getEventStopDateForRow:(NSInteger)index {
+    return ((EKEvent *)self.allEvents[index]).endDate;
+}
+
+-(NSInteger)getCountOfEvents {
+    return self.allEvents.count;
+}
+
 -(void)loadCalendars {
     _eventCalendars = [[NSMutableArray alloc] init];
     NSArray *phoneCalendarArray = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];

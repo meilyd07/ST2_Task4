@@ -11,6 +11,7 @@
 		6A1A469C22D40B0B0091B48A /* H3DottedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1A469B22D40B0B0091B48A /* H3DottedLine.m */; };
 		6A3AF15122CBF550005D05E9 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AF15022CBF550005D05E9 /* DateUtil.m */; };
 		6A3AF15422CC1D5C005D05E9 /* CalendarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AF15322CC1D5C005D05E9 /* CalendarModel.m */; };
+		6A3CD63322E2962500E37AD9 /* EventsCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3CD63222E2962500E37AD9 /* EventsCollectionView.m */; };
 		6A53C14522C9FA3400E145A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A53C14422C9FA3400E145A7 /* AppDelegate.m */; };
 		6A53C14822C9FA3400E145A7 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A53C14722C9FA3400E145A7 /* MainViewController.m */; };
 		6A53C14D22C9FA3600E145A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A53C14C22C9FA3600E145A7 /* Assets.xcassets */; };
@@ -35,6 +36,9 @@
 		6A3AF15022CBF550005D05E9 /* DateUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
 		6A3AF15222CC1D5C005D05E9 /* CalendarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarModel.h; sourceTree = "<group>"; };
 		6A3AF15322CC1D5C005D05E9 /* CalendarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarModel.m; sourceTree = "<group>"; };
+		6A3CD63022E2948C00E37AD9 /* MainCollectionViewLayoutDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainCollectionViewLayoutDelegate.h; sourceTree = "<group>"; };
+		6A3CD63122E2962500E37AD9 /* EventsCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventsCollectionView.h; sourceTree = "<group>"; };
+		6A3CD63222E2962500E37AD9 /* EventsCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsCollectionView.m; sourceTree = "<group>"; };
 		6A53C14022C9FA3400E145A7 /* EventApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A53C14322C9FA3400E145A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6A53C14422C9FA3400E145A7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -178,6 +182,9 @@
 				6ACCF50622D2A8AD00E28B00 /* MainCollectionViewLayout.m */,
 				6ACCF50E22D2B7E000E28B00 /* MainCollectionViewDelegate.h */,
 				6ACCF50F22D2B7E000E28B00 /* MainCollectionViewDelegate.m */,
+				6A3CD63022E2948C00E37AD9 /* MainCollectionViewLayoutDelegate.h */,
+				6A3CD63122E2962500E37AD9 /* EventsCollectionView.h */,
+				6A3CD63222E2962500E37AD9 /* EventsCollectionView.m */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -266,6 +273,7 @@
 				6A53C14522C9FA3400E145A7 /* AppDelegate.m in Sources */,
 				6A1A469C22D40B0B0091B48A /* H3DottedLine.m in Sources */,
 				6ACCF50722D2A8AD00E28B00 /* MainCollectionViewLayout.m in Sources */,
+				6A3CD63322E2962500E37AD9 /* EventsCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

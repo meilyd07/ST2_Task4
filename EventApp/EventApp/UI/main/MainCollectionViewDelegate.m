@@ -14,13 +14,14 @@
 @implementation MainCollectionViewDelegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 2;
+    return [self.viewModel getCountOfEvents];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     EventCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"EventCell" forIndexPath:indexPath];
-    cell.eventText.text = @"Bla bla bla";
+    //cell.eventText.text = @"Bla bla bla";
+    cell.eventText.text = [self.viewModel getEventTextForRow:indexPath.row];
     cell.eventView.backgroundColor = [UIColor magentaColor];
     return cell;
 }
@@ -30,6 +31,17 @@
     int minutes = indexPath.item * 15;
     [view setTime:[DateUtil.sharedInstance timeFormatted:minutes]];
     return view;
+}
+
+- (NSRange)mainCollectionViewLayout:(MainCollectionViewLayout *)layout timespanForCellAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSDate *start = [self.viewModel getEventStartDateForRow:indexPath.row];
+    NSDate *end = [self.viewModel getEventStopDateForRow:indexPath.row];
+    
+    NSUInteger i = 3600; //start time
+    NSUInteger j = 2700; //time interval
+    NSRange range = NSMakeRange(i, j);
+    return range;
 }
 
 @end

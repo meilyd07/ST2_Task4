@@ -20,6 +20,12 @@
 -(void)selectDateBy:(NSInteger)index;
 -(BOOL)isSelected:(NSInteger)index;
 
+-(NSString *)getEventTextForRow:(NSInteger)index;
+-(NSDate *)getEventStartDateForRow:(NSInteger)index;
+-(NSDate *)getEventStopDateForRow:(NSInteger)index;
+-(NSInteger)getCountOfEvents;
+
 -(void)loadCalendars;
 -(void)loadEventsForWeek;
+-(void)loadEventsForSelectedDay;
 @end
